@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login Sederhana</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;background:#f4f7fb;display:flex;align-items:center;justify-content:center;height:100vh;margin:0}
+    .card{background:#fff;padding:24px;border-radius:8px;box-shadow:0 6px 18px rgba(20,30,50,0.08);width:320px}
+    h2{margin:0 0 16px;font-size:20px}
+    label{display:block;font-size:13px;margin-top:8px}
+    input[type="text"],input[type="password"]{width:100%;padding:10px;margin-top:6px;border:1px solid #d7dee9;border-radius:6px;box-sizing:border-box}
+    button{width:100%;padding:10px;margin-top:14px;background:#2563eb;color:#fff;border:none;border-radius:6px;cursor:pointer}
+    .error{color:#b91c1c;font-size:13px;margin-top:8px}
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h2>Masuk</h2>
+    <form id="loginForm" onsubmit="return handleSubmit(event)">
+      <label for="username">Nama pengguna</label>
+      <input id="username" name="username" type="text" autocomplete="username" />
+
+      <label for="password">Kata sandi</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" />
+
+      <div id="error" class="error" role="alert" aria-live="polite" style="display:none"></div>
+
+      <button type="submit">Masuk</button>
+    </form>
+  </main>
+
+  <script>
+    function showError(msg){
+      const e = document.getElementById('error');
+      e.textContent = msg; e.style.display = msg ? 'block' : 'none';
+    }
+
+    function handleSubmit(e){
+      e.preventDefault();
+      const u = document.getElementById('username').value.trim();
+      const p = document.getElementById('password').value;
+      if(!u || !p){ showError('Nama pengguna dan kata sandi wajib diisi.'); return false; }
+      // Contoh pemeriksaan sederhana: username: admin, password: 1234
+      if(u === 'admin' && p === '1234'){
+        showError('');
+        alert('Berhasil masuk');
+        // redirect atau tindakan setelah login
+        return false;
+      }
+      showError('Nama pengguna atau kata sandi salah.');
+      return false;
+    }
+  </script>
+</body>
+</html>
